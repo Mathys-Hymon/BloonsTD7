@@ -17,6 +17,7 @@ public:
 
 	void Draw();
 	float GetSize();
+	Vector2 GetPosition();
 	TileType GetType();
 	void Unload();
 };

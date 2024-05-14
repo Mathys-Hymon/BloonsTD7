@@ -19,6 +19,11 @@ float Tile::GetSize()
 	return (float)sprite.height;
 }
 
+Vector2 Tile::GetPosition()
+{
+	return position;
+}
+
 TileType Tile::GetType()
 {
 	return type;

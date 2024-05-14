@@ -53,9 +53,19 @@ void MapManager::Draw()
 	}
 }
 
-TileType MapManager::GetTileType(int posX, int posY)
+Vector2 MapManager::CheckTile(Vector2 position)
 {
-	return Map[posX][posY]->GetType();
+	int GridPositionX = (position.x / (GetScreenWidth() / (sizeof(Map) / sizeof(Map[0]))));
+	int GridPositionY = (position.y / (GetScreenHeight() / (sizeof(Map) / sizeof(Map[0]))));
+
+	if (Map[GridPositionY][GridPositionX]->GetType() == TileType::PATH) {
+		return Map[GridPositionY][GridPositionX]->GetPosition();
+	}
+	else {
+		return { 0,0 };
+	}
+
+
 }
 
 

@@ -21,7 +21,7 @@ public:
 	void Load();
 	void Update();
 	void Draw();
-	TileType GetTileType(int posX, int posY);
+	Vector2 CheckTile(Vector2 position);
 	void Unload();
 };
 
