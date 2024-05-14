@@ -2,6 +2,7 @@
 #include "Tile.h"
 #include "raylib.h"
 #include <vector>
+#include <iostream>
 
 class MapManager
 {
@@ -17,9 +18,10 @@ public:
 	~MapManager();
 
 	void Initialize();
-	void ChooseMap(Image mapImage);
+	void Load();
 	void Update();
 	void Draw();
+	TileType GetTileType(int posX, int posY);
 	void Unload();
 };
 

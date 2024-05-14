@@ -1,18 +1,21 @@
 #include "raylib.h"
-#include <iostream>
+#include "MapManager.h"
 
 void Load();
-void Start();
 void Update();
 void Draw();
 void Unload();
+
+MapManager mapManager;
 
 int main() {
     Load();
 
     while (!WindowShouldClose()) {
-        Update();
+        ClearBackground(GREEN);
+
         Draw();
+        Update();
     }
 
     Unload();
@@ -22,25 +25,25 @@ int main() {
 
 void Load()
 {
-    InitWindow(500.128, 500.2, "Bloons TD7");
+    InitWindow(1000, 1000, "Bloons TD7");
     SetTargetFPS(60);
-}
-
-void Start()
-{
+    mapManager.Load();
 }
 
 void Update()
 {
+    mapManager.Update();
 }
 
 void Draw()
 {
     BeginDrawing();
-    ClearBackground(GREEN);
+    mapManager.Draw();
+
     EndDrawing();
 }
 
 void Unload()
 {
+    mapManager.Unload();
 }
