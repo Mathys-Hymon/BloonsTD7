@@ -4,5 +4,6 @@ enum class TileType
 {
 	PATH,
 	GRASS,
-	TURRET
+	TURRET,
+	CASTLE
 };

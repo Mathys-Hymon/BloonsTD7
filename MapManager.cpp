@@ -27,12 +27,22 @@ void MapManager::Load()
 	for (int y = 0; y < 20; y++) {
 		for (int x = 0; x < 20; x++) {
 
-			if (colors[y * mapImage.width + x].r == 255) {
+
+			if (colors[y * mapImage.width + x].r == 255 && colors[y * mapImage.width + x].g == 255 && colors[y * mapImage.width + x].b == 255) {
+				Map[y][x] = new Tile({ x * tileSize ,y * tileSize }, { tileSize, tileSize }, TileType::CASTLE, CastleTexture);
+			}
+			else if (colors[y * mapImage.width + x].r == 255) {
 				Map[y][x] = new Tile({ x * tileSize ,y * tileSize }, { tileSize, tileSize }, TileType::PATH, RoadTexture);
 			}
 			else if (colors[y * mapImage.width + x].g == 255) {
 				Map[y][x] = new Tile({ x * tileSize ,y * tileSize }, { tileSize, tileSize }, TileType::GRASS, GrassTexture);
 			}
+			else if (colors[y * mapImage.width + x].r == 0 && colors[y * mapImage.width + x].g == 0 && colors[y * mapImage.width + x].b == 0) {
+
+				Map[y][x] = new Tile({ x * tileSize ,y * tileSize }, { tileSize, tileSize }, TileType::PATH, RoadTexture);
+				spawnPos = { (float)Map[y][x]->GetPosition().x + (Map[y][x]->GetSize() / 2), (float)Map[y][x]->GetPosition().y + (Map[y][x]->GetSize() / 2) };
+			}
+
 		}
 	}
 }
@@ -55,17 +65,34 @@ void MapManager::Draw()
 
 Vector2 MapManager::CheckTile(Vector2 position, Vector2 direction)
 {
-	int GridPositionX = (position.x / (GetScreenWidth() / (sizeof(Map) / sizeof(Map[0]))));
-	int GridPositionY = (position.y / (GetScreenHeight() / (sizeof(Map) / sizeof(Map[0]))));
+	int GridPositionX = ((int)position.x / (GetScreenWidth() / (sizeof(Map) / sizeof(Map[0])))) + (int)direction.x;
+	int GridPositionY = ((int)position.y / (GetScreenHeight() / (sizeof(Map) / sizeof(Map[0])))) + (int)direction.y;
 
-	if (Map[GridPositionY + (int)direction.y][GridPositionX + (int)direction.x]->GetType() == TileType::PATH) {
-		return Map[GridPositionY][GridPositionX]->GetPosition();
+	if (GridPositionX >= 20 || GridPositionX < 0) {
+		return { 0,0 };
+	}
+	else if (GridPositionY >= 20 || GridPositionY < 0) {
+		return { 0,0 };
+	}
+    if (Map[GridPositionY][GridPositionX]->GetType() == TileType::PATH) {
+
+		Vector2 pos = Map[GridPositionY][GridPositionX]->GetPosition();
+
+		return { pos.x + (Map[0][0]->GetSize() / 2), pos.y + (Map[0][0]->GetSize() / 2)};
+	}
+	else if (Map[GridPositionY][GridPositionX]->GetType() == TileType::CASTLE) {
+		return { -1,-1 };
 	}
 	else {
 		return { 0,0 };
 	}
 
 
+}
+
+Vector2 MapManager::EnnemieSpawnPos()
+{
+	return spawnPos;
 }
 
 

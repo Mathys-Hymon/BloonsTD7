@@ -135,16 +135,20 @@
   <ItemGroup>
     <ClCompile Include="Ennemie.cpp" />
     <ClCompile Include="EnnemieSpawner.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Turret.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ennemie.h" />
     <ClInclude Include="EnnemieSpawner.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileType.h" />
+    <ClInclude Include="Turret.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

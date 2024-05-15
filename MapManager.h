@@ -12,6 +12,7 @@ private:
 	Texture RoadTexture;
 	Texture GrassTexture;
 	Texture CastleTexture;
+	Vector2 spawnPos;
 
 public:
 	MapManager();
@@ -22,6 +23,7 @@ public:
 	void Update();
 	void Draw();
 	Vector2 CheckTile(Vector2 position, Vector2 direction);
+	Vector2 EnnemieSpawnPos();
 	void Unload();
 };
 

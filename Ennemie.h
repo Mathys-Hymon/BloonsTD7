@@ -7,18 +7,23 @@ class Ennemie
 private:
 	Vector2 position;
 	Vector2 targetPosition;
-	Vector2 direction;
+	Vector2 direction = {0,1.0};
 
-	float life;
-	float speed;
+	int life = 100;
+	float speed = 50;
+	int damage;
+	int coins;
+	bool isDead = false;
 
-	Texture sprite;
+	Texture& sprite;
 	MapManager& mapManager;
 
 public:
-	Ennemie(MapManager& mapManager, Texture sprite, Vector2 pos);
+	Ennemie(MapManager& mapManager, Texture& sprite, Vector2 pos, float speed, int life);
 	~Ennemie();
 
+	bool IsDead();
+	void TakeDamage(int damage);
 	void Update();
 	void Draw();
 	void Unload();

@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include "MapManager.h"
+#include "GameManager.h"
 
 void Load();
 void Update();
@@ -7,6 +7,8 @@ void Draw();
 void Unload();
 
 MapManager mapManager;
+EnnemieSpawner ennemieSpawner(mapManager);
+GameManager gameManager(ennemieSpawner, mapManager);
 
 int main() {
     Load();
@@ -26,23 +28,22 @@ void Load()
 {
     InitWindow(1000, 1000, "Bloons TD7");
     SetTargetFPS(60);
-    mapManager.Load();
+    gameManager.Load();
 }
 
 void Update()
 {
-    mapManager.Update();
+    gameManager.Update();
 }
 
 void Draw()
 {
     BeginDrawing();
-    mapManager.Draw();
-
+    gameManager.Draw();
     EndDrawing();
 }
 
 void Unload()
 {
-    mapManager.Unload();
+    gameManager.Unload();
 }

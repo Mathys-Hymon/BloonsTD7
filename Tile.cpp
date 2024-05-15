@@ -16,7 +16,7 @@ void Tile::Draw()
 
 float Tile::GetSize()
 {
-	return (float)sprite.height;
+	return (float)size.x;
 }
 
 Vector2 Tile::GetPosition()
