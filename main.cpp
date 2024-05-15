@@ -17,7 +17,6 @@ int main() {
         Draw();
         Update();
     }
-
     Unload();
     CloseWindow();
     return 0;

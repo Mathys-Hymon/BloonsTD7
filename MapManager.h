@@ -21,7 +21,7 @@ public:
 	void Load();
 	void Update();
 	void Draw();
-	Vector2 CheckTile(Vector2 position);
+	Vector2 CheckTile(Vector2 position, Vector2 direction);
 	void Unload();
 };
 
