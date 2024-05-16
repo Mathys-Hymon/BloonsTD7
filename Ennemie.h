@@ -1,6 +1,5 @@
 #pragma once
 #include "MapManager.h"
-#include "playerDATA.h"
 
 
 class Ennemie
@@ -11,9 +10,11 @@ private:
 	Vector2 direction = {0,1.0};
 
 	int life = 100;
-	float speed = 50;
-	int damage;
+	int damage = 10;
 	int coins = 10;
+
+	float speed = 50;
+
 	bool isDead = false;
 
 	Texture& sprite;

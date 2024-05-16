@@ -19,6 +19,7 @@ public:
 	float GetSize();
 	Vector2 GetPosition();
 	TileType GetType();
+	void SetType(TileType newType);
 	void Unload();
 };
 

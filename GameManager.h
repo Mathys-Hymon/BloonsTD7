@@ -1,13 +1,16 @@
 #pragma once
-#include "EnnemieSpawner.h"
+#include "Turret.h"
 
 class GameManager
 {
 private :
-	int money;
-	int lifes;
+	float turretDelay = 0;
 	EnnemieSpawner& ennemieSpawner;
 	MapManager& mapManager;
+	
+	std::vector<Turret> turrets;
+
+	int turretPrice = 100;
 
 public:
 	GameManager(EnnemieSpawner& ennemieSpawner, MapManager& mapManager);

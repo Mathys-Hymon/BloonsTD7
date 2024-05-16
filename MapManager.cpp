@@ -52,6 +52,8 @@ void MapManager::Update()
 
 }
 
+
+
 void MapManager::Draw()
 {
 	for (int i = 0; i < 20; i++) {
@@ -89,6 +91,26 @@ Vector2 MapManager::CheckTile(Vector2 position, Vector2 direction)
 
 
 }
+
+TileType MapManager::CheckTileType(Vector2 position)
+{
+	int GridPositionX = ((int)position.x / (GetScreenWidth() / (sizeof(Map) / sizeof(Map[0]))));
+	int GridPositionY = ((int)position.y / (GetScreenHeight() / (sizeof(Map) / sizeof(Map[0]))));
+
+
+	return Map[GridPositionY][GridPositionX]->GetType();
+
+}
+
+Tile* MapManager::GetGridTile(Vector2 position)
+{
+	int GridPositionX = ((int)position.x / (GetScreenWidth() / (sizeof(Map) / sizeof(Map[0]))));
+	int GridPositionY = ((int)position.y / (GetScreenHeight() / (sizeof(Map) / sizeof(Map[0]))));
+
+
+	return Map[GridPositionY][GridPositionX];
+}
+
 
 Vector2 MapManager::EnnemieSpawnPos()
 {

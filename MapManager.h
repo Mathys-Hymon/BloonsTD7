@@ -1,5 +1,6 @@
 #pragma once
 #include "Tile.h"
+#include "playerDATA.h"
 #include "raylib.h"
 #include <vector>
 #include <iostream>
@@ -23,6 +24,8 @@ public:
 	void Update();
 	void Draw();
 	Vector2 CheckTile(Vector2 position, Vector2 direction);
+	TileType CheckTileType(Vector2 position);
+	Tile* GetGridTile(Vector2 position);
 	Vector2 EnnemieSpawnPos();
 	void Unload();
 };

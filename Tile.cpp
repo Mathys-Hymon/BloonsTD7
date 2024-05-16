@@ -29,6 +29,11 @@ TileType Tile::GetType()
 	return type;
 }
 
+void Tile::SetType(TileType newType)
+{
+	type = newType;
+}
+
 void Tile::Unload()
 {
 	UnloadTexture(sprite);

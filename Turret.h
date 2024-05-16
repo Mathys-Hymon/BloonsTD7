@@ -10,7 +10,13 @@ private:
 
 public:
 
-	Turret();
+	Turret(Vector2 pos, EnnemieSpawner& ennemieSpawnerRef);
 	~Turret();
+
+	Vector2 GetPosition() const;
+
+	void Update();
+	void Draw();
+	void Unload();
 };
 

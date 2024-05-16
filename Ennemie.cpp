@@ -22,6 +22,7 @@ void Ennemie::Update()
                     Vector2 newPos = mapManager.CheckTile(position, directionsToCheck[i]);
                     if (newPos.x < 0 && newPos.y < 0) {
                         isDead = true;
+                        castleHealth -= damage;
                     }
                     else if (newPos.x > 0 && newPos.y > 0) {
                         targetPosition = newPos;
