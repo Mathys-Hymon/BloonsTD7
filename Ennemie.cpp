@@ -15,8 +15,8 @@ void Ennemie::Update()
         if ((direction.x > 0 && position.x >= targetPosition.x) || (direction.x < 0 && position.x <= targetPosition.x) || (direction.y > 0 && position.y >= targetPosition.y) || (direction.y < 0 && position.y <= targetPosition.y)) {
             std::vector<Vector2> directionsToCheck;
             directionsToCheck.push_back(direction);
-            directionsToCheck.push_back({ direction.y, direction.x }); // À droite
-            directionsToCheck.push_back({ -direction.y, -direction.x }); // À gauche
+            directionsToCheck.push_back({ direction.y, direction.x });
+            directionsToCheck.push_back({ -direction.y, -direction.x });
 
             for (int i = 0; i < 3; i++) {
                     Vector2 newPos = mapManager.CheckTile(position, directionsToCheck[i]);
@@ -61,6 +61,7 @@ void Ennemie::TakeDamage(int damage)
 
     if (life < 0) {
         isDead = true;
+        playerMoney += coins;
     }
 }
 

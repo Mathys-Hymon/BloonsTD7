@@ -1,5 +1,6 @@
 #pragma once
 #include "MapManager.h"
+#include "playerDATA.h"
 
 
 class Ennemie
@@ -12,7 +13,7 @@ private:
 	int life = 100;
 	float speed = 50;
 	int damage;
-	int coins;
+	int coins = 10;
 	bool isDead = false;
 
 	Texture& sprite;

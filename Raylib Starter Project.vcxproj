@@ -138,6 +138,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="playerDATA.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Turret.cpp" />
   </ItemGroup>
@@ -146,6 +147,7 @@
     <ClInclude Include="EnnemieSpawner.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="MapManager.h" />
+    <ClInclude Include="playerDATA.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileType.h" />
     <ClInclude Include="Turret.h" />

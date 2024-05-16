@@ -69,7 +69,7 @@ void EnnemieSpawner::newWave(int _wave)
     ennemies.clear();
 
     wave = _wave;
-    ennemiePerWave = 1;
+    ennemiePerWave = (int)((float)_wave * 2.4f);
     ennemieSpeed += wave;
     ennemieLife += wave;
     spawning = true;

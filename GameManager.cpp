@@ -18,6 +18,7 @@ void GameManager::Load()
 
 void GameManager::Update()
 {
+    std::cout << playerMoney << std::endl;
     mapManager.Update();
     ennemieSpawner.Update();
 }
