@@ -55,7 +55,7 @@ void GameManager::Update()
 
             for (size_t i = 0; i < turrets.size(); i++) {
                 if (turrets[i].GetPosition().x == tileRef->GetPosition().x + tileRef->GetSize() / 2 && turrets[i].GetPosition().y == tileRef->GetPosition().y + tileRef->GetSize() / 2) {
-                    std::cout << "deleted";
+                    //turrets.erase(turrets.begin() + i);
                     mapManager.GetGridTile(mousePosition)->SetType(TileType::GRASS);
                     playerMoney += turretPrice / 2;
                     break;

@@ -1,7 +1,8 @@
 #include "Ennemie.h"
 
-Ennemie::Ennemie(MapManager& mapManager, Texture& sprite, Vector2 pos, float speed, int life) : sprite(sprite), position(pos), mapManager(mapManager), targetPosition(pos), life(life), speed(speed)
+Ennemie::Ennemie(MapManager& mapManager, Texture& sprite, Vector2 pos, float speed, int life) : sprite(sprite), position(pos), mapManager(mapManager), targetPosition(pos), life(life), speed(speed), maxLife(life)
 {
+     spriteScale = mapManager.GetGridTile(position)->GetSize();
 }
 
 Ennemie::~Ennemie()
@@ -45,9 +46,11 @@ void Ennemie::Draw()
     if (!isDead) {
 
         Vector2 spriteSize = { sprite.width,sprite.height };
-        float scaleDivided = 7;
 
-        DrawTexturePro(sprite, { 0,0,spriteSize.x,spriteSize.y }, { position.x, position.y, spriteSize.x / scaleDivided,spriteSize.y / scaleDivided }, { (spriteSize.x / scaleDivided) / 2,(spriteSize.y / scaleDivided) /2}, 0, WHITE);
+        DrawTexturePro(sprite, { 0,0,spriteSize.x,spriteSize.y }, { position.x, position.y, spriteScale,spriteScale }, { spriteScale / 2,spriteScale /2}, 0, WHITE);
+        
+        DrawRectangle(position.x - 16, position.y - 29, 32, 8, WHITE);
+        DrawRectangle(position.x - 15, position.y - 28, (life/maxLife) * 30, 6, RED);
     }
 }
 

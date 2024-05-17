@@ -44,7 +44,13 @@ void EnnemieSpawner::Update()
     }
 
     if (!spawning && ennemiesAlive == 0) {
-        newWave(wave + 1);
+        if (timer <= restTime) {
+            timer += GetFrameTime();
+        }
+        else {
+            newWave(wave + 1);
+            timer = 0;
+        }
     }
 }
 
@@ -52,6 +58,9 @@ void EnnemieSpawner::Draw()
 {
     for (int i = 0; i < ennemies.size(); i++) {
         ennemies[i].Draw();
+    }
+    if (timer != 0) {
+        DrawText(TextFormat("NEW WAVE IN %s", std::to_string((int)(restTime - timer)).c_str()), 500 - MeasureText(TextFormat("NEW WAVE IN %s", std::to_string((int)(restTime - timer)).c_str()), 30)/2, 900, 30, WHITE);
     }
 }
 

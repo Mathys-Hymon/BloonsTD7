@@ -12,6 +12,8 @@ private :
 	int wave = 0;
 
 	float spawnTimer = 1;
+	float timer = 0;
+	float restTime = 10;
 	float ennemiePerWave;
 	float ennemieSpeed = 300;
 	int ennemieLife = 100;

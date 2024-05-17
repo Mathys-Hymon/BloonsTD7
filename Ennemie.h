@@ -10,6 +10,8 @@ private:
 	Vector2 direction = {0,1.0};
 
 	int life = 100;
+	float spriteScale;
+	int maxLife = 100;
 	int damage = 10;
 	int coins = 10;
 
