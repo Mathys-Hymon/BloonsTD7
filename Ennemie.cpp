@@ -44,13 +44,13 @@ void Ennemie::Update()
 void Ennemie::Draw()
 {
     if (!isDead) {
-
         Vector2 spriteSize = { sprite.width,sprite.height };
 
         DrawTexturePro(sprite, { 0,0,spriteSize.x,spriteSize.y }, { position.x, position.y, spriteScale,spriteScale }, { spriteScale / 2,spriteScale /2}, 0, WHITE);
         
+        float lifeRation = ((float)life / (float)maxLife) * 30.0;
         DrawRectangle(position.x - 16, position.y - 29, 32, 8, WHITE);
-        DrawRectangle(position.x - 15, position.y - 28, (life/maxLife) * 30, 6, RED);
+        DrawRectangle(position.x - 15, position.y - 28, lifeRation, 6, RED);
     }
 }
 
@@ -63,10 +63,15 @@ void Ennemie::TakeDamage(int damage)
 {
     life -= damage;
 
-    if (life < 0) {
+    if (life <= 0) {
         isDead = true;
         playerMoney += coins;
     }
+}
+
+Vector2 Ennemie::GetPosition()
+{
+    return position;
 }
 
 bool Ennemie::IsDead()

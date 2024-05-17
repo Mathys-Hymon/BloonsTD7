@@ -26,6 +26,7 @@ public :
 	void Update();
 	void Draw();
 	void Unload();
+	std::vector<Ennemie>& GetEnnemies();
 
 	void newWave(int wave);
 

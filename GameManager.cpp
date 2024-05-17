@@ -12,9 +12,10 @@ GameManager::~GameManager()
 
 void GameManager::Load()
 {
-        mapManager.Load();
-        ennemieSpawner.Load();
-        ennemieSpawner.newWave(1);
+    turretSprite = LoadTexture("resources/texture/turret.png");
+    mapManager.Load();
+    ennemieSpawner.Load();
+    ennemieSpawner.newWave(1);
 }
 
 void GameManager::Update()
@@ -40,7 +41,7 @@ void GameManager::Update()
             mapManager.GetGridTile(mousePosition)->SetType(TileType::TURRET);
 
             Vector2 turretPos = { tileRef->GetPosition().x + tileRef->GetSize() / 2,tileRef->GetPosition().y + tileRef->GetSize() / 2 };
-            turrets.emplace_back(turretPos, ennemieSpawner);
+            turrets.emplace_back(turretPos, ennemieSpawner, turretSprite, tileRef->GetSize());
         }
         else {
             turretDelay += GetFrameTime();

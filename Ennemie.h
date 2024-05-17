@@ -27,6 +27,7 @@ public:
 	~Ennemie();
 
 	bool IsDead();
+	Vector2 GetPosition();
 	void TakeDamage(int damage);
 	void Update();
 	void Draw();

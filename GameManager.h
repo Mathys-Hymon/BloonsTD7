@@ -7,6 +7,7 @@ private :
 	float turretDelay = 0;
 	EnnemieSpawner& ennemieSpawner;
 	MapManager& mapManager;
+	Texture turretSprite;
 	
 	std::vector<Turret> turrets;
 

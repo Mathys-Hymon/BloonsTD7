@@ -83,3 +83,8 @@ void EnnemieSpawner::newWave(int _wave)
     ennemieLife += wave;
     spawning = true;
 }
+
+std::vector<Ennemie>& EnnemieSpawner::GetEnnemies()
+{
+    return ennemies;
+}
