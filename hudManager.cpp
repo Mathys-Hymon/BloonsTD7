@@ -34,7 +34,7 @@ void hudManager::Draw()
 	case 2: //VICTORY / DEFEAT
 
 		DrawText("CONGRATULATIONS, YOU'VE SURVIVED", 500 - MeasureText("CONGRATULATIONS, YOU'VE SURVIVED", 30) / 2, 200, 30, BLACK);
-		DrawText(TextFormat("%s WAVES", std::to_string(wave).c_str()), 150 - MeasureText(TextFormat("%s WAVES", std::to_string(wave).c_str()), 15) / 2, 200, 15, WHITE);
+		DrawText(TextFormat("%s WAVES", std::to_string(wave).c_str()), 500 - MeasureText(TextFormat("%s WAVES", std::to_string(wave).c_str()), 30) / 2, 400, 30, BLACK);
 
 		if (button({ 380,500 }, "RESTART", { 150,100 })) {
 			wave = 1;
