@@ -9,7 +9,7 @@ private :
 	std::vector<Ennemie> ennemies;
 	Texture ennemieSprite;
 	MapManager& mapManager;
-	int wave = 0;
+	//int wave = 0;
 
 	float spawnTimer = 1;
 	float timer = 0;

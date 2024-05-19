@@ -1,7 +1,7 @@
 #include "GameManager.h"
 
 
-GameManager::GameManager(EnnemieSpawner& ennemieSpawner, MapManager& mapManager) : ennemieSpawner(ennemieSpawner), mapManager(mapManager)
+GameManager::GameManager(EnnemieSpawner& ennemieSpawner, MapManager& mapManager, hudManager& _HUD) : ennemieSpawner(ennemieSpawner), mapManager(mapManager), HUD(_HUD)
 {
 }
 
@@ -20,87 +20,118 @@ void GameManager::Load()
 
 void GameManager::Update()
 {
-    mapManager.Update();
-    ennemieSpawner.Update();
 
-    for (int i = 0; i < turrets.size(); i++) {
-        turrets[i].Update();
-    }
-
-    Vector2 mousePosition = GetMousePosition();
-
-    if (mapManager.CheckTileType(mousePosition) == TileType::GRASS) {
+    if (screenIndex == 1) {
 
 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && playerMoney >= turretPrice && turretDelay >= 0.1f)
-        {
-            Tile* tileRef = mapManager.GetGridTile(mousePosition);
-
-            turretDelay = 0;
-            playerMoney -= turretPrice;
-            mapManager.GetGridTile(mousePosition)->SetType(TileType::TURRET);
-
-            Vector2 turretPos = { tileRef->GetPosition().x + tileRef->GetSize() / 2,tileRef->GetPosition().y + tileRef->GetSize() / 2 };
-            turrets.emplace_back(turretPos, ennemieSpawner, turretSprite, tileRef->GetSize());
+        mapManager.Update();
+        ennemieSpawner.Update();
+        for (int i = 0; i < turrets.size(); i++) {
+            turrets[i].Update();
         }
-        else {
-            turretDelay += GetFrameTime();
-        }
-    }
-    else if (mapManager.CheckTileType(mousePosition) == TileType::TURRET) {
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && turretDelay >= 0.1f)
-        {
-            turretDelay = 0;
-            playerMoney += turretPrice / 2;
-            Tile* tileRef = mapManager.GetGridTile(mousePosition);
 
-            for (size_t i = 0; i < turrets.size(); i++) {
-                if (turrets[i].GetPosition().x == tileRef->GetPosition().x + tileRef->GetSize() / 2 && turrets[i].GetPosition().y == tileRef->GetPosition().y + tileRef->GetSize() / 2) {
-                    //turrets.erase(turrets.begin() + i);
-                    mapManager.GetGridTile(mousePosition)->SetType(TileType::GRASS);
-                    playerMoney += turretPrice / 2;
-                    break;
-                }
+        Vector2 mousePosition = GetMousePosition();
+
+        if (mapManager.CheckTileType(mousePosition) == TileType::GRASS) {
+
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && playerMoney >= turretPrice && turretDelay >= 0.1f)
+            {
+                Tile* tileRef = mapManager.GetGridTile(mousePosition);
+
+                turretDelay = 0;
+                playerMoney -= turretPrice;
+                mapManager.GetGridTile(mousePosition)->SetType(TileType::TURRET);
+
+                Vector2 turretPos = { tileRef->GetPosition().x + tileRef->GetSize() / 2,tileRef->GetPosition().y + tileRef->GetSize() / 2 };
+                turrets.emplace_back(turretPos, ennemieSpawner, turretSprite, tileRef->GetSize());
+            }
+            else {
+                turretDelay += GetFrameTime();
             }
         }
-        else {
-            turretDelay += GetFrameTime();
+        else if (mapManager.CheckTileType(mousePosition) == TileType::TURRET) {
+
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && turretDelay >= 0.1f)
+            {
+                turretDelay = 0;
+                Tile* tileRef = mapManager.GetGridTile(mousePosition);
+
+
+                // DESOLE POUR CA, NOORMALEMENT JE FAIS UN turrets.erase(turrets.begin() + i); MAIS LA POUR UNE RAISON INCONNUE CA MARCHE PAS DONC BAH.........
+
+                std::vector<Turret> tempTurret;
+                int turretToDestroy = -1;
+
+                for (int i = 0; i < turrets.size(); i++) {
+
+                    tempTurret.push_back(turrets[i]);
+
+                    if (turrets[i].GetPosition().x == tileRef->GetPosition().x + tileRef->GetSize() / 2 && turrets[i].GetPosition().y == tileRef->GetPosition().y + tileRef->GetSize() / 2) {
+
+                        turretToDestroy = i;
+                    }
+                }
+
+                turrets.clear();
+
+                for (int j = 0; j < tempTurret.size(); j++) {
+                    if (j != turretToDestroy) {
+                        turrets.push_back(tempTurret[j]);
+                    }
+
+                }
+
+                mapManager.GetGridTile(mousePosition)->SetType(TileType::GRASS);
+                playerMoney += turretPrice / 2;
+            }
+            else {
+                turretDelay += GetFrameTime();
+            }
         }
     }
+
+    if (castleHealth <= 0) {
+        screenIndex = 2;
+    }
+ 
 }
 
 void GameManager::Draw()
 {
     mapManager.Draw();
     ennemieSpawner.Draw();
+    HUD.Draw();
 
     for (int i = 0; i < turrets.size(); i++) {
         turrets[i].Draw();
     }
 
-    Vector2 mousePosition = GetMousePosition();
-    if (mapManager.CheckTileType(mousePosition) == TileType::GRASS) {
+    if (screenIndex == 1) {
+        Vector2 mousePosition = GetMousePosition();
+        if (mapManager.CheckTileType(mousePosition) == TileType::GRASS) {
 
-        Tile* tileRef = mapManager.GetGridTile(mousePosition);
+            Tile* tileRef = mapManager.GetGridTile(mousePosition);
 
-        if (playerMoney >= turretPrice) {
+            if (playerMoney >= turretPrice) {
 
-            DrawText(TextFormat("LMB:%s coins", std::to_string(turretPrice).c_str()), mousePosition.x + 30, mousePosition.y, 20, WHITE);
+                DrawText(TextFormat("LMB:%s coins", std::to_string(turretPrice).c_str()), mousePosition.x + 30, mousePosition.y, 20, WHITE);
 
-            DrawRectangleLines(tileRef->GetPosition().x, tileRef->GetPosition().y, tileRef->GetSize(), tileRef->GetSize(), WHITE);
+                DrawRectangleLines(tileRef->GetPosition().x, tileRef->GetPosition().y, tileRef->GetSize(), tileRef->GetSize(), WHITE);
+            }
+            else {
+                DrawText(TextFormat("LMB:%s coins", std::to_string(turretPrice).c_str()), mousePosition.x + 30, mousePosition.y, 20, RED);
+
+                DrawRectangleLines(tileRef->GetPosition().x, tileRef->GetPosition().y, tileRef->GetSize(), tileRef->GetSize(), RED);
+            }
         }
-        else {
-            DrawText(TextFormat("LMB:%s coins", std::to_string(turretPrice).c_str()), mousePosition.x + 30, mousePosition.y, 20, RED);
+
+        else if (mapManager.CheckTileType(mousePosition) == TileType::TURRET) {
+
+            Tile* tileRef = mapManager.GetGridTile(mousePosition);
+            DrawText(TextFormat("LMB to sell:%s coins", std::to_string(turretPrice / 2).c_str()), mousePosition.x + 30, mousePosition.y, 20, WHITE);
 
             DrawRectangleLines(tileRef->GetPosition().x, tileRef->GetPosition().y, tileRef->GetSize(), tileRef->GetSize(), RED);
         }
-    }
-    else if(mapManager.CheckTileType(mousePosition) == TileType::TURRET) {
-
-        Tile* tileRef = mapManager.GetGridTile(mousePosition);
-            DrawText(TextFormat("LMB to sell:%s coins", std::to_string(turretPrice /2).c_str()), mousePosition.x + 30, mousePosition.y, 20, WHITE);
-
-            DrawRectangleLines(tileRef->GetPosition().x, tileRef->GetPosition().y, tileRef->GetSize(), tileRef->GetSize(), RED);
     }
 }
 

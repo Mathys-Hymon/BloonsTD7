@@ -8,10 +8,6 @@ MapManager::~MapManager()
 {
 }
 
-void MapManager::Initialize()
-{
-}
-
 void MapManager::Load()
 {
 

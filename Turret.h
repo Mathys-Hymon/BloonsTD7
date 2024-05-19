@@ -3,6 +3,7 @@
 class Turret
 {
 private:
+
 	EnnemieSpawner& ennemieSpawner;
 	Vector2 position;
 

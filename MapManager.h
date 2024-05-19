@@ -1,9 +1,6 @@
 #pragma once
 #include "Tile.h"
-#include "playerDATA.h"
-#include "raylib.h"
-#include <vector>
-#include <iostream>
+#include "HUDManager.h"
 
 class MapManager
 {
@@ -19,7 +16,6 @@ public:
 	MapManager();
 	~MapManager();
 
-	void Initialize();
 	void Load();
 	void Update();
 	void Draw();

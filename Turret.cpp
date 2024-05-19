@@ -1,5 +1,5 @@
 #include "Turret.h"
-#include <cmath> // Pour sqrt et pow
+#include <cmath>
 
 Turret::Turret(Vector2 pos, EnnemieSpawner& ennemieSpawnerRef, Texture& sprite, float spriteScale)
     : position(pos), ennemieSpawner(ennemieSpawnerRef), sprite(sprite), spriteScale(spriteScale)

@@ -7,6 +7,7 @@ private :
 	float turretDelay = 0;
 	EnnemieSpawner& ennemieSpawner;
 	MapManager& mapManager;
+	hudManager& HUD;
 	Texture turretSprite;
 	
 	std::vector<Turret> turrets;
@@ -14,7 +15,7 @@ private :
 	int turretPrice = 100;
 
 public:
-	GameManager(EnnemieSpawner& ennemieSpawner, MapManager& mapManager);
+	GameManager(EnnemieSpawner& ennemieSpawner, MapManager& mapManager, hudManager& HUD);
 	~GameManager();
 
 	void Load();

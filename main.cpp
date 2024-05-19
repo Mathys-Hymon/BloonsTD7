@@ -1,14 +1,16 @@
 #include "raylib.h"
 #include "GameManager.h"
 
+
 void Load();
 void Update();
 void Draw();
 void Unload();
 
 MapManager mapManager;
+hudManager HUD;
 EnnemieSpawner ennemieSpawner(mapManager);
-GameManager gameManager(ennemieSpawner, mapManager);
+GameManager gameManager(ennemieSpawner, mapManager, HUD);
 
 int main() {
     Load();

@@ -136,6 +136,7 @@
     <ClCompile Include="Ennemie.cpp" />
     <ClCompile Include="EnnemieSpawner.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="hudManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="playerDATA.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Ennemie.h" />
     <ClInclude Include="EnnemieSpawner.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="hudManager.h" />
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="playerDATA.h" />
     <ClInclude Include="Tile.h" />
